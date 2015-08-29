@@ -2,11 +2,10 @@ var webpack = require('webpack'),
   path = require('path');
 
 module.exports = {
-  context: path.join(__dirname, '/app'),
-  entry: 'src/index.js',
+  entry: './app/index.js',
   output: {
-    filename: 'app.bundle.js',
-    path: path.join(__dirname, '/public/js/')
+    filename: 'app.js',
+    path: path.join(__dirname, '/public/js/bundle')
   },
   module: {
     loaders: [{
@@ -14,5 +13,9 @@ module.exports = {
       exclude: /(node_modules|bower_components)/,
       loaders: ['babel']
     }]
-  }
+  },
+  externals: {
+    "leaflet": "L"
+  },
+  devtool: 'source-map'
 }
