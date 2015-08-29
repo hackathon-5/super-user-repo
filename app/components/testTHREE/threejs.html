@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<title>vendr</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="three.min.js"></script>
+		<script src="JSONLoader.js"></script>
+		<script src="OBJMTLLoader.js"></script>
+		<script src="MTLLoader.js"></script>
+		<script>
+			var can;
+			var isLoaded = false;
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			
+			var loader = new THREE.OBJMTLLoader();
+				loader.load( 'can.obj', 'can.mtl', function ( object ) {
+					can = object;
+					isLoaded = true;
+					scene.add( object );
+					});
+			
+			
+			
+			var ambientLight = new THREE.AmbientLight(0x555555);
+			scene.add(ambientLight);
+
+			var directionalLight = new THREE.DirectionalLight(0xffffff);
+			directionalLight.position.set(1, 1, 1).normalize();
+			scene.add(directionalLight);
+
+			//var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			//var material = new THREE.MeshBasicMaterial( { color: 0xfff000 } );
+			//var cube = new THREE.Mesh( geometry, material );
+			//scene.add( cube );
+
+			camera.position.z = 5;
+
+			var render = function () {
+				requestAnimationFrame( render );
+
+				//mesh.rotation.x += 0.1;
+				
+				if(isLoaded){
+				can.rotation.y += 0.05;
+				//can.rotation.x += 0.05;
+				}
+				
+				renderer.render(scene, camera);
+			};
+
+			render();
+		</script>
+	</body>
+</html>
