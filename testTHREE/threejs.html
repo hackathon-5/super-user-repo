@@ -13,6 +13,7 @@
 		<script src="MTLLoader.js"></script>
 		<script>
 			var can;
+			var isLoaded = false;
 			var scene = new THREE.Scene();
 			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
@@ -23,6 +24,7 @@
 			var loader = new THREE.OBJMTLLoader();
 				loader.load( 'can.obj', 'can.mtl', function ( object ) {
 					can = object;
+					isLoaded = true;
 					scene.add( object );
 					});
 			
@@ -46,8 +48,12 @@
 				requestAnimationFrame( render );
 
 				//mesh.rotation.x += 0.1;
+				
+				if(isLoaded){
 				can.rotation.y += 0.05;
-
+				//can.rotation.x += 0.05;
+				}
+				
 				renderer.render(scene, camera);
 			};
 
