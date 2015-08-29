@@ -5,8 +5,8 @@ class IndexView extends React.Component {
   render() {
     return (
       <div id="index-view">
-        <input type="search" />
-        <Map/>
+        <input id="snack-search" type="search" />
+        <Map id="local-map"/>
       </div>
     );
   }

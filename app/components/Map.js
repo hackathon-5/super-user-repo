@@ -4,24 +4,20 @@ import L from 'leaflet';
 class Map extends React.Component {
   
   componentDidMount() {
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      maxZoom: 18,
-      id: 'vendr.na2jib93',
-      accessToken: 'pk.eyJ1IjoidmVuZHIiLCJhIjoiNDZmMGMxZmNmNTg3ZTI3MzAwMTkyNTlkMzVkMDA0NjkifQ.OyzQOpupa80_dXnrrFUlcA'
+    var map =  this.map = L.map(React.findDOMNode(this), {
+      layers: [
+        L.tileLayer('https://{s}.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+          id: 'vendr.na2jib93',
+          accessToken: 'pk.eyJ1IjoidmVuZHIiLCJhIjoiNDZmMGMxZmNmNTg3ZTI3MzAwMTkyNTlkMzVkMDA0NjkifQ.OyzQOpupa80_dXnrrFUlcA'
+        })
+      ]
     });
-    this.renderMap();
-  }
 
-  componentDidUpdate() {
-    this.renderMap();
+    map.setView([51.505, -0.09], 13);
   }
 
   render() {
-    return <div style={{width: 333, height: 300}} ref="map"></div>;
-  }
-
-  renderMap() {
-    L.map(React.findDOMNode(this.refs.map)).setView([51.505, -0.09], 13);
+    return <div id={this.props.id} className={this.props.className} style={{width: 333, height: 300}} />;
   }
 
 }

@@ -23654,8 +23654,8 @@
 	      return _react2['default'].createElement(
 	        'div',
 	        { id: 'index-view' },
-	        _react2['default'].createElement('input', { type: 'search' }),
-	        _react2['default'].createElement(_Map2['default'], null)
+	        _react2['default'].createElement('input', { id: 'snack-search', type: 'search' }),
+	        _react2['default'].createElement(_Map2['default'], { id: 'local-map' })
 	      );
 	    }
 	  }]);
@@ -23706,27 +23706,19 @@
 	  _createClass(Map, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      _leaflet2['default'].tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-	        maxZoom: 18,
-	        id: 'vendr.na2jib93',
-	        accessToken: 'pk.eyJ1IjoidmVuZHIiLCJhIjoiNDZmMGMxZmNmNTg3ZTI3MzAwMTkyNTlkMzVkMDA0NjkifQ.OyzQOpupa80_dXnrrFUlcA'
+	      var map = this.map = _leaflet2['default'].map(_react2['default'].findDOMNode(this), {
+	        layers: [_leaflet2['default'].tileLayer('https://{s}.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+	          id: 'vendr.na2jib93',
+	          accessToken: 'pk.eyJ1IjoidmVuZHIiLCJhIjoiNDZmMGMxZmNmNTg3ZTI3MzAwMTkyNTlkMzVkMDA0NjkifQ.OyzQOpupa80_dXnrrFUlcA'
+	        })]
 	      });
-	      this.renderMap();
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      this.renderMap();
+	
+	      map.setView([51.505, -0.09], 13);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2['default'].createElement('div', { style: { width: 333, height: 300 }, ref: 'map' });
-	    }
-	  }, {
-	    key: 'renderMap',
-	    value: function renderMap() {
-	      _leaflet2['default'].map(_react2['default'].findDOMNode(this.refs.map)).setView([51.505, -0.09], 13);
+	      return _react2['default'].createElement('div', { id: this.props.id, className: this.props.className, style: { width: 333, height: 300 } });
 	    }
 	  }]);
 	
